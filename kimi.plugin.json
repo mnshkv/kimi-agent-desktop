@@ -1,0 +1,60 @@
+{
+  "$schema": "https://kimi.com/schemas/kimi.plugin.schema.json",
+  "name": "agent-desktop",
+  "version": "0.1.0",
+  "description": "Computer Use для macOS поверх CLI agent-desktop: AX-дерево с refs, headless клики/ввод/скролл/клавиши, скриншоты как image content, batch и wait. Замена kimi-cu.",
+  "keywords": [
+    "computer-use",
+    "macos",
+    "accessibility",
+    "automation",
+    "screenshot",
+    "gui"
+  ],
+  "author": "a.g.menshikov",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Desktop",
+    "shortDescription": "Фоновое управление GUI macOS через accessibility-дерево (agent-desktop CLI)",
+    "longDescription": "Плагин оборачивает открытый CLI vercel-labs/agent-desktop в MCP-сервер: наблюдение интерфейса — снапшот accessibility-дерева с квалифицированными refs и скриншоты (PNG, ужимаются до 2048 px), действия — клики, ввод текста, set-value, клавиши, скролл, выбор опций, drag (физический, явный headed), clipboard, ожидание элементов и batch-последовательности. Всё headless по умолчанию: курсор не двигается, фокус не крадётся.\n\nТребуется: node >= 18, глобально установленный CLI (npm i -g agent-desktop, см. bin/setup.sh) и права Accessibility + Screen Recording для приложения Kimi Code.",
+    "developerName": "a.g.menshikov",
+    "category": "PRODUCTIVITY",
+    "hostKind": "local",
+    "platforms": [
+      "macos"
+    ]
+  },
+  "mcpServers": {
+    "mac": {
+      "command": "node",
+      "args": [
+        "./bin/agent-desktop-mcp.mjs"
+      ],
+      "cwd": "./",
+      "enabledTools": [
+        "status",
+        "list_apps",
+        "list_windows",
+        "get_app_state",
+        "find",
+        "click",
+        "type_text",
+        "set_value",
+        "press_key",
+        "scroll",
+        "select_option",
+        "toggle",
+        "drag",
+        "screenshot",
+        "clipboard_get",
+        "clipboard_set",
+        "clipboard_clear",
+        "wait",
+        "batch",
+        "launch",
+        "close_app"
+      ]
+    }
+  }
+}
