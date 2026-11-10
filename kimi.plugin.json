@@ -20,10 +20,7 @@
     "longDescription": "Плагин оборачивает открытый CLI vercel-labs/agent-desktop в MCP-сервер: наблюдение интерфейса — снапшот accessibility-дерева с квалифицированными refs и скриншоты (PNG, ужимаются до 2048 px), действия — клики, ввод текста, set-value, клавиши, скролл, выбор опций, drag (физический, явный headed), clipboard, ожидание элементов и batch-последовательности. Всё headless по умолчанию: курсор не двигается, фокус не крадётся.\n\nТребуется: node >= 18, глобально установленный CLI (npm i -g agent-desktop, см. bin/setup.sh) и права Accessibility + Screen Recording для приложения Kimi Code.",
     "developerName": "a.g.menshikov",
     "category": "PRODUCTIVITY",
-    "hostKind": "local",
-    "platforms": [
-      "macos"
-    ]
+    "hostKind": "local"
   },
   "mcpServers": {
     "mac": {
@@ -56,5 +53,8 @@
         "close_app"
       ]
     }
-  }
+  },
+  "platforms": [
+    "macos"
+  ]
 }
