@@ -1,60 +1,42 @@
 {
   "$schema": "https://kimi.com/schemas/kimi.plugin.schema.json",
   "name": "agent-desktop",
-  "version": "0.1.0",
-  "description": "Computer Use для macOS поверх CLI agent-desktop: AX-дерево с refs, headless клики/ввод/скролл/клавиши, скриншоты как image content, batch и wait. Замена kimi-cu.",
+  "version": "0.2.0",
+  "description": "Computer Use для macOS/Windows/Linux поверх родного MCP-сервера agent-desktop (vercel-labs): каждая команда CLI — отдельный инструмент desktop_* с генерируемой схемой. Headless по умолчанию.",
   "keywords": [
     "computer-use",
     "macos",
+    "windows",
+    "linux",
     "accessibility",
     "automation",
     "screenshot",
-    "gui"
+    "gui",
+    "mcp"
   ],
   "author": "a.g.menshikov",
   "license": "MIT",
   "skills": "./skills/",
   "interface": {
     "displayName": "Agent Desktop",
-    "shortDescription": "Фоновое управление GUI macOS через accessibility-дерево (agent-desktop CLI)",
-    "longDescription": "Плагин оборачивает открытый CLI vercel-labs/agent-desktop в MCP-сервер: наблюдение интерфейса — снапшот accessibility-дерева с квалифицированными refs и скриншоты (PNG, ужимаются до 2048 px), действия — клики, ввод текста, set-value, клавиши, скролл, выбор опций, drag (физический, явный headed), clipboard, ожидание элементов и batch-последовательности. Всё headless по умолчанию: курсор не двигается, фокус не крадётся.\n\nТребуется: node >= 18, глобально установленный CLI (npm i -g agent-desktop, см. bin/setup.sh) и права Accessibility + Screen Recording для приложения Kimi Code.",
+    "shortDescription": "Управление GUI через accessibility-дерево — родной MCP-сервер agent-desktop (vercel-labs)",
+    "longDescription": "Плагин запускает родной MCP-сервер vercel-labs/agent-desktop (`agent-desktop mcp`): каждая команда CLI становится инструментом desktop_* с автогенерируемой схемой, каталог инструментов следует за установленным CLI без обновления плагина. Наблюдение: снапшоты accessibility-дерева с квалифицированными refs, скриншоты как image content. Действия: клики, ввод, set-value, клавиши, скролл, выбор, toggle, drag, clipboard, окна и приложения, уведомления, batch и wait, плюс песочницы (macOS VM). Headless по умолчанию: курсор не двигается, фокус не крадётся; физический ввод включается флагом --headed при старте сервера.\n\nТребуется: CLI agent-desktop >= 1.2.0 (npm i -g agent-desktop или brew install agent-desktop, см. bin/setup.sh) и права Accessibility + Screen Recording для приложения Kimi Code.",
     "developerName": "a.g.menshikov",
     "category": "PRODUCTIVITY",
     "hostKind": "local"
   },
   "mcpServers": {
-    "mac": {
-      "command": "node",
+    "desktop": {
+      "command": "agent-desktop",
       "args": [
-        "./bin/agent-desktop-mcp.mjs"
+        "mcp"
       ],
-      "cwd": "./",
-      "enabledTools": [
-        "status",
-        "list_apps",
-        "list_windows",
-        "get_app_state",
-        "find",
-        "click",
-        "type_text",
-        "set_value",
-        "press_key",
-        "scroll",
-        "select_option",
-        "toggle",
-        "drag",
-        "screenshot",
-        "clipboard_get",
-        "clipboard_set",
-        "clipboard_clear",
-        "wait",
-        "batch",
-        "launch",
-        "close_app"
-      ]
+      "cwd": "./"
     }
   },
   "platforms": [
-    "macos"
+    "macos",
+    "windows",
+    "linux"
   ]
 }
